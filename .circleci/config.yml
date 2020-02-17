@@ -144,7 +144,7 @@ jobs:
           name: Publishing docker image to aws ECR
           command: |
             sudo pip install awscli
-            eval $(aws ecr get-login --no-include-email --region us-east-1)
+            eval $(aws ecr get-login --no-include-email --region eu-west-3)
             make build-ml-api-aws tag-ml-api push-ml-api-aws
             aws ecs update-service --cluster ml-api-cluster --service custom-service --task-definition  first-run-task-definition --force-new-deployment
 
@@ -190,10 +190,10 @@ workflows:
             - test_regression_model
             - test_ml_api
             - section_9_differential_tests
-          filters:
-            branches:
-              only:
-                - master
+          #filters:
+            #branches:
+             # only:
+                #- master
       # - section_10_deploy_to_heroku:
       #     requires:
       #       - train_and_upload_regression_model
